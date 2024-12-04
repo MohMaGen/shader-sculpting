@@ -6,21 +6,23 @@
 
 
 int main(int argc, char **argv) {
-    InitWindow(300, 300, "shader-sculpting");
+    InitWindow(800, 800, "shader-sculpting");
 
-    RenderTexture2D texture = LoadRenderTexture(300, 300);
+    RenderTexture2D texture = LoadRenderTexture(GetScreenWidth(), GetScreenHeight());
 
     Shader shader = LoadShader(NULL, "shader.fs");
 
     int time_loc          = GetShaderLocation(shader, "time");
+    int colors_loc        = GetShaderLocation(shader, "colors");
     int fog_color_loc     = GetShaderLocation(shader, "fogColor");
     int fog_intensity_loc = GetShaderLocation(shader, "fogIntensity");
 
+    SetShaderValueV(shader, colors_loc, rgba_colors, SHADER_UNIFORM_VEC4, 10);
 
     SetShaderValue(shader, fog_color_loc, &rgba_colors[Background].r,
                    SHADER_UNIFORM_VEC4);
 
-    float intensity = 0.2;
+    float intensity = 0.3;
     SetShaderValue(shader, fog_intensity_loc, &intensity,
                    SHADER_UNIFORM_FLOAT);
 
