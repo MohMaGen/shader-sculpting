@@ -1,2 +1,1 @@
-./build.sh
-./shader-sculpting
+./build.sh && ./shader-sculpting
